@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Signup Form </title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity=
+    "sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+          var stateObject = {
+              "MP": {
+                     "Bhopal": "01",
+                      "Harda": "02",
+                      "Indore": "03"
+              },
+              "MH": {
+                      "Locknow": "01",
+                      "Mirzapur": "02"
+              },
+               "GJ": {
+                      "Rajkot": "01",
+                      "Vadodara": "03"
+              }
+          }
+          window.onload = function () {
+                var StateSelection = document.getElementById("StateSelection"),
+                DistrictSelection = document.getElementById("DistrictSelection"),
+                districtSel = document.getElementById("districtSel");
+                for (var country in stateObject) {
+                      StateSelection.options[StateSelection.options.length] = new Option(country, country);
+                }
+                StateSelection.onchange = function () {
+                      DistrictSelection.length = 1; // remove all options bar first
+                      districtSel.length = 1; // remove all options bar first
+                      if (this.selectedIndex < 1) return; // done
+                      for (var State in stateObject[this.value]) {
+                          DistrictSelection.options[DistrictSelection.options.length] = new Option(State, State);
+                      }
+                }
+                StateSelection.onchange(); // reset in case page is reloaded
+                DistrictSelection.onchange = function () {
+                      districtSel.length = 1; // remove all options bar first
+                      if (this.selectedIndex < 1) return; // done
+                      var City = stateObject[StateSelection.value][this.value];
+                      for (var i = 0; i < City.length; i++) {
+                            districtSel.options[districtSel.options.length] = new Option(City[i],City[i]);
+                      }
+                }
+          }
+    </script>
+
+
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <div class="container" >
+        <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 main">
+
+            <form action="/add" method="post" enctype="multipart/form-data">
+
+                  <h1> Signup form </h1>
+                  <input class="box" type="text" name="Name" id="Name"
+                  placeholder="Name"  required /><br>
+
+                  <input class="box" type="email" name="Email" id="Email"
+                  placeholder="E-Mail " required /><br>
+                 <input class="box" type="tel" name="Contact_No" id="Contact_No"  pattern="[0-9]{10}"
+                  placeholder="Phone Number (10-digit) " required/><br>
+                  <input class="box" type="text" name="Hobbies"
+                  id="Hobbies" placeholder="Hobbies" required/><br>
+                  <label for="img">Select image:</label>
+                  <input  class="box" type="file" id="Image" name="Image" accept="image/*"
+                   required/>
+                  <br>
+                  <br>
+                  <select  name="State" id="StateSelection" size="1" required >
+                  <option value="" selected="selected" >*Please Select Your State</option>
+                  </select>
+                  <br>
+                  <br>
+                  <select name="City" id="DistrictSelection" size="1" required  >
+                  <option value="" selected="selected">*Please Select State First</option>
+                  </select>
+                  <br>
+                  <select name="" id="districtSel" size="1" style="display: none;">
+                  <option value="" selected="selected">*Please Select State First</option>
+                  </select>
+                  <br>
+                  <input type="submit" id="submitDetails"
+                  name="submitDetails" value="Submit" /><br>
+
+                  <div class="container">
+
+            </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+
+    </div>
+    </div>
+</body>
+</html>
