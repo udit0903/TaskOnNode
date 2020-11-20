@@ -1,9 +1,9 @@
 # TaskOnNode
 
-##How To Run \n
-node -v \n
-npm  -v \n
-npm init \n
-npm install \n
-node app \n
+-##How To Run
+-node -v 
+-npm  -v 
+-npm init 
+-npm install 
+-node app
 
